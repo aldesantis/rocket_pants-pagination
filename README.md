@@ -11,7 +11,9 @@ Pagination support for [RocketPants](https://github.com/Sutto/rocket_pants).
 
 Add this line to your application's Gemfile:
 
-```ruby gem 'rocket_pants-pagination' ```
+```ruby
+gem 'rocket_pants-pagination'
+```
 
 And then execute:
 
