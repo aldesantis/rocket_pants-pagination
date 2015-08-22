@@ -18,13 +18,15 @@ module RocketPants
     #
     # Paginates the given relation.
     #
+    # The page param is 'page' by default.
+    #
     # @param [ActiveRecord::Relation] the relation to paginate
     # @param [Hash] an options hash for the #paginate method
     #
     # @return [ActiveRecord::Relation] a paginated relation
     #
     def paginate(relation, options = {})
-      relation.paginate(options.merge(page: params[:page]))
+      relation.paginate({ page: params[:page] }.merge(options))
     end
 
     #
@@ -56,10 +58,10 @@ module RocketPants
     #
     # Paginates and exposes the given collection with pagination metadata.
     #
-    # Basically, this just calls {#paginate}, then {#expose_with_pagination}.
+    # Basically, just calls {#paginate}, then {#expose_with_pagination}.
     #
-    # @param [Hash{Symbol => ActiveRecord::Relation}] a hash with exactly one
-    #   element, its key being the roto keys and its value a paginated relation
+    # @param [Hash(Symbol => ActiveRecord::Relation)] a hash with exactly one
+    #   element, its key being the root key and its value a paginated relation
     #
     # @raise [ArgumentError] if the hash is malformed
     #
@@ -70,11 +72,35 @@ module RocketPants
 
     private
 
+    #
+    # Returns the first pair from the given hash.
+    #
+    # This is used to extract the root key and collection from a hash.
+    #
+    # @param [Hash(Symbol => ActiveRecord::Relation)] a hash with exactly one
+    #   element, its key being the root key and its value a relation
+    #
+    # @return [Array(Symbol, ActiveRecord::Relation)] an array containing a root
+    #   key and a relation
+    #
+    # @raise [ArgumentError] if the hash is malformed
+    #
     def extract_pagination_elements_from(hash)
       validate_pagination_hash! hash
       hash.first
     end
 
+    #
+    # Validates the given hash.
+    #
+    # Ensures that the hash has exactly one element and that the first element's
+    # key is not a reserved one.
+    #
+    # @param [Hash] a hash to validate
+    #
+    # @raise [ArgumentError] if the hash doesn't have exactly 1 element
+    # @raise [ArgumentError] if the first element's key is a reserved one
+    #
     def validate_pagination_hash!(hash)
       if hash.size != 1
         raise ArgumentError, "the given hash should contain exactly 1 element (#{hash.size} elements)"
