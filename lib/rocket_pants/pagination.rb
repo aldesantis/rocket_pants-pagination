@@ -40,19 +40,19 @@ module RocketPants
     def expose_with_pagination(hash)
       root_key, collection = extract_pagination_elements_from hash
 
-      response = {}
+      response = {
+        count: collection.count,
+        pagination: {
+          pages: collection.total_pages,
+          current: collection.current_page,
+          count: collection.count,
+          per_page: collection.per_page,
+          previous: collection.previous_page,
+          next: collection.next_page
+        }
+      }
 
       response[root_key] = ActiveModel::ArraySerializer.new(collection)
-
-      response[:count] = collection.count
-      response[:pagination] = {
-        pages: collection.total_pages,
-        current: collection.current_page,
-        count: collection.count,
-        per_page: collection.per_page,
-        previous: collection.previous_page,
-        next: collection.next_page
-      }
 
       expose response
     end
