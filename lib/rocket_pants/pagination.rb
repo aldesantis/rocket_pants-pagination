@@ -41,6 +41,7 @@ module RocketPants
       root_key, collection = extract_pagination_elements_from hash
 
       response = {
+        "#{root_key}" => ActiveModel::ArraySerializer.new(collection),
         count: collection.count,
         pagination: {
           pages: collection.total_pages,
@@ -51,8 +52,6 @@ module RocketPants
           next: collection.next_page
         }
       }
-
-      response[root_key] = ActiveModel::ArraySerializer.new(collection)
 
       expose response
     end
