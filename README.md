@@ -1,5 +1,10 @@
 # RocketPants::Pagination
 
+[![Gem Version](https://badge.fury.io/rb/rocket_pants-pagination.svg)](http://badge.fury.io/rb/rocket_pants-pagination)
+[![Build Status](https://travis-ci.org/alessandro1997/rocket_pants-pagination.svg)](https://travis-ci.org/alessandro1997/rocket_pants-pagination)
+[![Dependency Status](https://gemnasium.com/alessandro1997/rocket_pants-pagination.svg)](https://gemnasium.com/alessandro1997/rocket_pants-pagination)
+[![Code Climate](https://codeclimate.com/github/alessandro1997/rocket_pants-pagination/badges/gpa.svg)](https://codeclimate.com/github/alessandro1997/rocket_pants-pagination)
+
 Pagination support for [RocketPants](https://github.com/Sutto/rocket_pants).
 
 ## Installation
