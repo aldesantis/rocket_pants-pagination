@@ -1,17 +1,40 @@
 require 'rocket_pants/pagination/version'
 
 module RocketPants
+  #
+  # Pagination support for RocketPants
+  #
+  # Include this module in your RocketPants controllers to add pagination
+  # support.
+  #
+  # @author Alessandro Desantis <desa.alessandro@gmail.com>
+  #
   module Pagination
-    DEFAULT_PAGINATION_OPTIONS = { per_page: 10 }
+    #
+    # Reserved root keys
+    #
     RESERVED_PAGINATION_KEYS = [:count, :pagination]
 
+    #
+    # Paginates the given relation.
+    #
+    # @param [ActiveRecord::Relation] the relation to paginate
+    # @param [Hash] an options hash for the #paginate method
+    #
+    # @return [ActiveRecord::Relation] a paginated relation
+    #
     def paginate(relation, options = {})
-      options = DEFAULT_PAGINATION_OPTIONS.merge(options)
-      options = options.merge(page: params[:page])
-
-      relation.paginate(options)
+      relation.paginate(options.merge(page: params[:page]))
     end
 
+    #
+    # Exposes the given collection with pagination metadata.
+    #
+    # @param [Hash{Symbol => ActiveRecord::Relation}] a hash with exactly one
+    #   element, its key being the root key and its value a paginated relation
+    #
+    # @raise [ArgumentError] if the hash is malformed
+    #
     def expose_with_pagination(hash)
       root_key, collection = extract_pagination_elements_from hash
 
@@ -30,6 +53,16 @@ module RocketPants
       expose response
     end
 
+    #
+    # Paginates and exposes the given collection with pagination metadata.
+    #
+    # Basically, this just calls {#paginate}, then {#expose_with_pagination}.
+    #
+    # @param [Hash{Symbol => ActiveRecord::Relation}] a hash with exactly one
+    #   element, its key being the roto keys and its value a paginated relation
+    #
+    # @raise [ArgumentError] if the hash is malformed
+    #
     def paginate_and_expose(hash)
       root_key, collection = extract_pagination_elements_from hash
       expose_with_pagination "#{root_key}" => paginate(collection)
