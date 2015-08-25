@@ -3,6 +3,7 @@ require 'active_model_serializers'
 require 'will_paginate'
 
 require 'rocket_pants/pagination/version'
+require 'rocket_pants/pagination/swagger' if defined?(::Swagger::Blocks)
 
 module RocketPants
   #
