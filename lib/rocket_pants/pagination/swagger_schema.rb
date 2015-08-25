@@ -1,6 +1,6 @@
 module RocketPants
   module Pagination
-    module Swagger
+    module SwaggerSchema
       include ::Swagger::Blocks
 
       swagger_schema :RocketPants_Pagination do

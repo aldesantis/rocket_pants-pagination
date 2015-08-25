@@ -3,7 +3,6 @@ require 'active_model_serializers'
 require 'will_paginate'
 
 require 'rocket_pants/pagination/version'
-require 'rocket_pants/pagination/swagger' if defined?(::Swagger::Blocks)
 
 module RocketPants
   #
@@ -15,6 +14,8 @@ module RocketPants
   # @author Alessandro Desantis <desa.alessandro@gmail.com>
   #
   module Pagination
+    autoload :SwaggerSchema, 'rocket_pants/pagination/swagger_schema'
+
     #
     # Reserved root keys
     #
