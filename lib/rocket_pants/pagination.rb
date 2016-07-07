@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rocket_pants'
 require 'active_model_serializers'
 require 'will_paginate'
@@ -19,7 +20,7 @@ module RocketPants
     #
     # Reserved root keys
     #
-    RESERVED_PAGINATION_KEYS = [:count, :pagination]
+    RESERVED_PAGINATION_KEYS = [:count, :pagination].freeze
 
     #
     # Paginates the given relation.
@@ -47,7 +48,7 @@ module RocketPants
       root_key, collection = extract_pagination_elements_from hash
 
       response = {
-        "#{root_key}" => ActiveModel::ArraySerializer.new(collection),
+        root_key.to_s => ActiveModel::ArraySerializer.new(collection),
         count: collection.count,
         pagination: {
           pages: collection.total_pages,
@@ -74,7 +75,7 @@ module RocketPants
     #
     def paginate_and_expose(hash)
       root_key, collection = extract_pagination_elements_from hash
-      expose_with_pagination "#{root_key}" => paginate(collection)
+      expose_with_pagination root_key.to_s => paginate(collection)
     end
 
     private
@@ -109,13 +110,15 @@ module RocketPants
     # @raise [ArgumentError] if the first element's key is a reserved one
     #
     def validate_pagination_hash!(hash)
-      if hash.size != 1
-        raise ArgumentError, "the given hash should contain exactly 1 element (#{hash.size} elements)"
-      end
+      fail(
+        ArgumentError,
+        "The hash should contain exactly 1 element (#{hash.size} given)"
+      ) if hash.size != 1
 
-      if hash.keys.first.to_sym.in?(RESERVED_PAGINATION_KEYS)
-        raise ArgumentError, "the given root key is reserved: #{hash.keys.first}"
-      end
+      fail(
+        ArgumentError,
+        "#{hash.keys.first} is a reserved root key"
+      ) if hash.keys.first.to_sym.in?(RESERVED_PAGINATION_KEYS)
     end
   end
 end
