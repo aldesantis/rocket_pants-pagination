@@ -20,10 +20,6 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/requests/*'
-
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
