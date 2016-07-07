@@ -74,7 +74,7 @@ module RocketPants
     #
     def paginate_and_expose(hash)
       root_key, collection = extract_pagination_elements_from hash
-      expose_with_pagination root_key.to_s => paginate(collection)
+      expose_with_pagination root_key => paginate(collection)
     end
 
     private
