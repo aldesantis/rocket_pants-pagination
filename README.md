@@ -1,9 +1,9 @@
 # RocketPants::Pagination
 
-[![Gem Version](https://badge.fury.io/rb/rocket_pants-pagination.svg)](http://badge.fury.io/rb/rocket_pants-pagination)
-[![Build Status](https://travis-ci.org/alessandro1997/rocket_pants-pagination.svg)](https://travis-ci.org/alessandro1997/rocket_pants-pagination)
-[![Dependency Status](https://gemnasium.com/alessandro1997/rocket_pants-pagination.svg)](https://gemnasium.com/alessandro1997/rocket_pants-pagination)
-[![Code Climate](https://codeclimate.com/github/alessandro1997/rocket_pants-pagination/badges/gpa.svg)](https://codeclimate.com/github/alessandro1997/rocket_pants-pagination)
+[![Gem Version](https://img.shields.io/gem/v/rocket_pants-pagination.svg?maxAge=3600&style=flat-square)](https://rubygems.org/gems/rocket_pants-pagination)
+[![Build Status](https://img.shields.io/travis/alessandro1997/rocket_pants-pagination.svg?maxAge=3600&style=flat-square)](https://travis-ci.org/alessandro1997/rocket_pants-pagination)
+[![Dependency Status](https://img.shields.io/gemnasium/alessandro1997/rocket_pants-pagination.svg?maxAge=3600&style=flat-square)](https://gemnasium.com/github.com/alessandro1997/rocket_pants-pagination)
+[![Code Climate](https://img.shields.io/codeclimate/github/alessandro1997/rocket_pants-pagination.svg?maxAge=3600&style=flat-square)](https://codeclimate.com/github/alessandro1997/rocket_pants-pagination)
 
 Pagination support for [RocketPants](https://github.com/Sutto/rocket_pants).
 
