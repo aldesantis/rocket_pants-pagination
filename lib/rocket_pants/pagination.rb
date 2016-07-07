@@ -15,8 +15,6 @@ module RocketPants
   # @author Alessandro Desantis <desa.alessandro@gmail.com>
   #
   module Pagination
-    autoload :SwaggerSchema, 'rocket_pants/pagination/swagger_schema'
-
     #
     # Reserved root keys
     #
