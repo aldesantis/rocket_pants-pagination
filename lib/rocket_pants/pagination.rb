@@ -47,7 +47,7 @@ module RocketPants
       root_key, collection = extract_pagination_elements_from hash
 
       response = {
-        root_key => ActiveModel::Serializer::ArraySerializer.new(collection),
+        root_key => ActiveModel::Serializer::CollectionSerializer.new(collection),
         count: collection.count,
         pagination: {
           pages: collection.total_pages,
