@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe 'RocketPants::Pagination' do # rubocop:disable RSpec/DescribeClass
+RSpec.describe RocketPants::Pagination do
   subject do
     Class.new do
+      # rubocop:disable RSpec/DescribedClass
       include RocketPants::Pagination
+      # rubocop:enable RSpec/DescribedClass
 
       def params
         { page: 1 }
@@ -65,7 +67,7 @@ RSpec.describe 'RocketPants::Pagination' do # rubocop:disable RSpec/DescribeClas
   end
 
   before(:each) do
-    allow(collection).to receive(:paginate)
+    allow(relation).to receive(:paginate)
       .and_return(paginated_relation)
 
     allow(ActiveModel::Serializer::ArraySerializer).to receive(:new)
@@ -99,7 +101,7 @@ RSpec.describe 'RocketPants::Pagination' do # rubocop:disable RSpec/DescribeClas
         .with(expected_hash)
         .once
 
-      subject.paginate_and_expose test_collection: collection
+      subject.paginate_and_expose test_collection: relation
     end
   end
 end
