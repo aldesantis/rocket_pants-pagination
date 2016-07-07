@@ -49,7 +49,7 @@ RSpec.describe RocketPants::Pagination do
     end.new
   end
 
-  let(:serialized_relation) { instance_double('ActiveModel::Serializer::ArraySerializer') }
+  let(:serialized_relation) { instance_double('ActiveModel::Serializer::CollectionSerializer') }
 
   let(:expected_hash) do
     {
@@ -70,7 +70,7 @@ RSpec.describe RocketPants::Pagination do
     allow(relation).to receive(:paginate)
       .and_return(paginated_relation)
 
-    allow(ActiveModel::Serializer::ArraySerializer).to receive(:new)
+    allow(ActiveModel::Serializer::CollectionSerializer).to receive(:new)
       .with(paginated_relation)
       .and_return(serialized_relation)
   end
