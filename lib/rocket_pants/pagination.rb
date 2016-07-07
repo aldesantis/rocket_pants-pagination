@@ -18,7 +18,8 @@ module RocketPants
     #
     # Reserved root keys
     #
-    RESERVED_PAGINATION_KEYS = [:count, :pagination].freeze
+    RESERVED_PAGINATION_KEYS = %i(count pagination).freeze
+    private_constant :RESERVED_PAGINATION_KEYS
 
     #
     # Paginates the given relation.
@@ -46,7 +47,7 @@ module RocketPants
       root_key, collection = extract_pagination_elements_from hash
 
       response = {
-        root_key.to_s => ActiveModel::ArraySerializer.new(collection),
+        root_key => ActiveModel::Serializer::ArraySerializer.new(collection),
         count: collection.count,
         pagination: {
           pages: collection.total_pages,
@@ -78,35 +79,11 @@ module RocketPants
 
     private
 
-    #
-    # Returns the first pair from the given hash.
-    #
-    # This is used to extract the root key and collection from a hash.
-    #
-    # @param [Hash(Symbol => ActiveRecord::Relation)] a hash with exactly one
-    #   element, its key being the root key and its value a relation
-    #
-    # @return [Array(Symbol, ActiveRecord::Relation)] an array containing a root
-    #   key and a relation
-    #
-    # @raise [ArgumentError] if the hash is malformed
-    #
     def extract_pagination_elements_from(hash)
       validate_pagination_hash! hash
       hash.first
     end
 
-    #
-    # Validates the given hash.
-    #
-    # Ensures that the hash has exactly one element and that the first element's
-    # key is not a reserved one.
-    #
-    # @param [Hash] a hash to validate
-    #
-    # @raise [ArgumentError] if the hash doesn't have exactly 1 element
-    # @raise [ArgumentError] if the first element's key is a reserved one
-    #
     def validate_pagination_hash!(hash)
       fail(
         ArgumentError,
